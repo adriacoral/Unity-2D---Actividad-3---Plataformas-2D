@@ -9,7 +9,6 @@ public class PlayerKeys : MonoBehaviour
         Keys++;
     }
 
-
     public bool UseKey()
     {
         if(Keys > 0) 
