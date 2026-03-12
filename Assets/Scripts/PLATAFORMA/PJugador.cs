@@ -9,17 +9,6 @@ public class PJugador : MonoBehaviour
         posicionAnterior = transform.position;
     }
 
-    void FixedUpdate()
-    {
-        Vector3 movimientoPlataforma = transform.position - posicionAnterior;
-
-        if (jugador != null)
-        {
-            jugador.position += movimientoPlataforma;
-        }
-
-        posicionAnterior = transform.position;
-    }
 
     void OnTriggerEnter2D(Collider2D colision)
     {

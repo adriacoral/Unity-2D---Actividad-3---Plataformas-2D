@@ -1,4 +1,4 @@
- using UnityEngine;
+using UnityEngine;
 
 public class CircleCollisionDetector : MonoBehaviour
 {
@@ -20,13 +20,36 @@ public class CircleCollisionDetector : MonoBehaviour
     {
         wasColliding = isColliding;
         Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position + (Vector3)offset, radius, mask);
+
+        GameObject plataformaMovil = null;
+
         if (collisions.Length > 0)
         {
             isColliding = true;
+
+            for (int i = 0; i < collisions.Length; i++)
+            {
+                if (collisions[i].CompareTag("PlataformaMovil"))
+                {
+                    plataformaMovil = collisions[i].gameObject;
+                }
+            }
         }
         else
         {
             isColliding = false;
+        }
+
+        if (plataformaMovil != null)
+        {
+            if (transform.parent == null || plataformaMovil != transform.parent.gameObject)
+            {
+                transform.parent = plataformaMovil.transform;
+            }
+        }
+        else
+        {
+            transform.parent = null;
         }
     }
 

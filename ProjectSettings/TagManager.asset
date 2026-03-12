@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - PlataformaMovible
-  - player
+  - PlataformaMovil
+  - Jugador
   layers:
   - Default
   - TransparentFX
@@ -13,7 +13,7 @@ TagManager:
   - suelo
   - Water
   - UI
-  - 
+  - jugador
   - 
   - 
   - 

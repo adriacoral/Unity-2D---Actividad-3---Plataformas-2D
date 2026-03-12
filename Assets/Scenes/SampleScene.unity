@@ -135,9 +135,9 @@ GameObject:
   - component: {fileID: 15952174}
   - component: {fileID: 15952177}
   - component: {fileID: 15952178}
-  m_Layer: 3
-  m_Name: Square (4)
-  m_TagString: Untagged
+  m_Layer: 0
+  m_Name: Plataforma
+  m_TagString: PlataformaMovil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -365,7 +365,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.34983665}
+  m_Offset: {x: 0, y: 0.4635886}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -375,7 +375,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 0.30032673}
+  m_Size: {x: 1, y: 0.5278306}
   m_EdgeRadius: 0
 --- !u!1 &84613251
 GameObject:
@@ -717,7 +717,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7656347, y: -0.77535987, z: -10}
+  m_LocalPosition: {x: -0.9350783, y: -0.57846, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1083,12 +1083,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1018811047001103, guid: 96eb952384f50304f8cb5ba8cf8db081, type: 3}
+      propertyPath: radius
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018811047001103, guid: 96eb952384f50304f8cb5ba8cf8db081, type: 3}
+      propertyPath: offset.y
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1018811047001103, guid: 96eb952384f50304f8cb5ba8cf8db081, type: 3}
       propertyPath: isColliding
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1018811047001103, guid: 96eb952384f50304f8cb5ba8cf8db081, type: 3}
       propertyPath: mask.m_Bits
-      value: 8
+      value: 59
       objectReference: {fileID: 0}
     - target: {fileID: 993375436960906744, guid: 96eb952384f50304f8cb5ba8cf8db081, type: 3}
       propertyPath: Lookahead.Time
@@ -1168,7 +1176,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6976086188896160357, guid: 96eb952384f50304f8cb5ba8cf8db081, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6976086188896160357, guid: 96eb952384f50304f8cb5ba8cf8db081, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8177826759474391472, guid: 96eb952384f50304f8cb5ba8cf8db081, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1176,7 +1188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8177826759474391472, guid: 96eb952384f50304f8cb5ba8cf8db081, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.07
       objectReference: {fileID: 0}
     - target: {fileID: 8177826759474391472, guid: 96eb952384f50304f8cb5ba8cf8db081, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1327,12 +1339,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -2.8611083, y: 10.024994}
-      - {x: -17.760448, y: 10.12224}
-      - {x: -15.973107, y: -3.665734}
+    - - {x: 26.561363, y: 11.87969}
+      - {x: -4.5928273, y: 12.258678}
+      - {x: -21.017727, y: 12.355926}
+      - {x: -20.384865, y: -3.1551778}
       - {x: -4.3283296, y: -3.709847}
-      - {x: 12.674577, y: -3.7607384}
-      - {x: 15.044519, y: 11.257441}
+      - {x: 8.30405, y: -3.377821}
+      - {x: 26.424383, y: -2.6552253}
   m_UseDelaunayMesh: 0
 --- !u!4 &1533156282
 Transform:
@@ -1494,7 +1507,7 @@ GameObject:
   - component: {fileID: 1611860680}
   - component: {fileID: 1611860679}
   - component: {fileID: 1611860681}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
