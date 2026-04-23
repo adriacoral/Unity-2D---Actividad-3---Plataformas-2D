@@ -21,14 +21,17 @@ public class CircleCollisionDetector : MonoBehaviour
         wasColliding = isColliding;
         Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position + (Vector3)offset, radius, mask);
 
+        isColliding = false;
         GameObject plataformaMovil = null;
 
         if (collisions.Length > 0)
         {
-            isColliding = true;
-
             for (int i = 0; i < collisions.Length; i++)
             {
+                if (!collisions[i].isTrigger)
+                {
+                    isColliding = true;
+                }
                 if (collisions[i].CompareTag("PlataformaMovil"))
                 {
                     plataformaMovil = collisions[i].gameObject;

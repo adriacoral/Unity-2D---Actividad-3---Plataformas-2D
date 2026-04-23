@@ -8,25 +8,20 @@ public class Plataforma : MonoBehaviour
     public float velocidad = 2f;
 
     private Transform destinoActual;
-    private Rigidbody2D rb; 
 
     void Start()
     {
         destinoActual = puntoB;
-        rb = GetComponent<Rigidbody2D>(); 
     }
 
    
-    void FixedUpdate() 
+    void Update() 
     {
-        
-        Vector2 nuevaPosicion = Vector2.MoveTowards(rb.position, destinoActual.position, velocidad * Time.fixedDeltaTime);
-        
-       
-        rb.MovePosition(nuevaPosicion);
+
+        transform.position = Vector2.MoveTowards(transform.position, destinoActual.position, velocidad * Time.deltaTime);
 
         
-        if (Vector2.Distance(rb.position, destinoActual.position) < 0.1f)
+        if (Vector2.Distance(transform.position, destinoActual.position) < 0.1f)
         {
             if (destinoActual == puntoB)
             {
