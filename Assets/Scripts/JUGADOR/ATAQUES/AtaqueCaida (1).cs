@@ -6,12 +6,12 @@ using UnityEngine.InputSystem;
 public class AtaqueCaida : MonoBehaviour
 {
     [Header("Configuración")]
-    public float fuerzaCaida = 25f;        
-    public float fuerzaRebote = 20f;       
-    public string tagRebote = "Rebotable"; 
+    public float fuerzaCaida = 25f;
+    public float fuerzaRebote = 20f;
+    public string tagRebote = "Rebotable";
 
     private Rigidbody2D rb;
-    private CircleCollisionDetector coll;  
+    private CircleCollisionDetector coll;
     private bool atacandoCaida = false;
 
     void Start()
@@ -22,12 +22,10 @@ public class AtaqueCaida : MonoBehaviour
 
     void Update()
     {
-       
         if (Keyboard.current.xKey.wasPressedThisFrame && !coll.isColliding)
         {
             IniciarCaida();
         }
-
 
         if (atacandoCaida && coll.startedCollidingThisFrame)
         {
@@ -38,24 +36,26 @@ public class AtaqueCaida : MonoBehaviour
     void IniciarCaida()
     {
         atacandoCaida = true;
-
-       
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, -fuerzaCaida);
-
-        Debug.Log("¡Ataque en caída!");
     }
 
     void OnCollisionEnter2D(Collision2D colision)
     {
-       
         if (!atacandoCaida) return;
 
-       
         if (colision.gameObject.CompareTag(tagRebote))
         {
+            // Solo destruye si es un enemigo (tiene EnemyHealth)
+            EnemyHealth enemigo = colision.gameObject.GetComponent<EnemyHealth>();
+            if (enemigo != null)
+            {
+                Destroy(colision.gameObject);
+                Debug.Log("Enemigo destruido!");
+            }
+
+            // Rebota siempre, sea enemigo o plataforma
             atacandoCaida = false;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, fuerzaRebote);
-            Debug.Log("¡Rebote en: " + colision.gameObject.name + "!");
         }
     }
 }

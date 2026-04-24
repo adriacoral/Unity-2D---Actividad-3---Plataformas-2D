@@ -3,32 +3,52 @@ using UnityEngine;
 // Este script va en el PREFAB de la bala
 public class Bala : MonoBehaviour
 {
-    public int daño = 1;                   // Lo asigna EnemyShooter automáticamente
-    public float tiempoVida = 4f;          // La bala se destruye sola después de X segundos
+    public int daño = 1;
+    public float tiempoVida = 4f;
 
-    void Start()
+    private bool yaGolpeo = false;         // Evita que dañe más de una vez
+    private GameObject quienDisparo;       // Referencia al enemigo que la disparó
+
+    // EnemyShooter llama a esto justo después de crear la bala
+    public void Inicializar(GameObject emisor)
     {
-        // Destruir la bala si no golpea nada
+        quienDisparo = emisor;
+
+        // Ignora físicamente la colisión entre la bala y el enemigo que la disparó
+        Collider2D colBala = GetComponent<Collider2D>();
+        Collider2D colEnemigo = emisor.GetComponent<Collider2D>();
+        if (colBala != null && colEnemigo != null)
+        {
+            Physics2D.IgnoreCollision(colBala, colEnemigo);
+        }
+
         Destroy(gameObject, tiempoVida);
     }
 
     void OnTriggerEnter2D(Collider2D otro)
     {
-        // Si toca al jugador, le quita vida
+        if (yaGolpeo) return;              // Si ya golpeó, ignora todo lo demás
+
+        // Ignora triggers (como el CircleCollisionDetector del jugador)
+        if (otro.isTrigger) return;
+
+        // Ignora al enemigo que disparó
+        if (quienDisparo != null && otro.gameObject == quienDisparo) return;
+
+        // Si toca al jugador, le hace daño
         if (otro.CompareTag("Player"))
         {
+            yaGolpeo = true;
             PlayerHealth vida = otro.GetComponent<PlayerHealth>();
             if (vida != null)
             {
-                vida.TakeDamage(daño); // Usa exactamente tu método TakeDamage
+                vida.TakeDamage(daño);
+                Debug.Log("¡Bala golpeó al jugador! Daño: " + daño);
             }
-            Destroy(gameObject); // Destruye la bala al impactar
         }
 
-        // Si toca el suelo u otro obstáculo (que no sea el propio enemigo), se destruye
-        if (!otro.CompareTag("Enemy") && !otro.isTrigger)
-        {
-            Destroy(gameObject);
-        }
+        // En cualquier impacto válido, se destruye
+        yaGolpeo = true;
+        Destroy(gameObject);
     }
 }

@@ -29,21 +29,17 @@ public class AtaqueNormal : MonoBehaviour
 
     void Atacar()
     {
-        // Activa la animación (necesita un Trigger llamado "Atacar" en el Animator)
         if (anim != null)
             anim.SetTrigger("Atacar");
 
-        // Detecta enemigos en el área de golpe
         Collider2D[] golpeados = Physics2D.OverlapCircleAll(puntoAtaque.position, radioAtaque, capaEnemigos);
 
         foreach (Collider2D enemigo in golpeados)
         {
             Debug.Log("Golpeaste a: " + enemigo.name);
-            // Aquí puedes llamar a tu sistema de daño, por ejemplo:
-            // enemigo.GetComponent<Enemigo>().RecibirDaño(dañoAtaque);
+            enemigo.GetComponent<EnemyHealth>()?.RecibirDaño(dañoAtaque); // 👈 esta línea
         }
     }
-
     // Muestra el área de ataque en la ventana Scene
     void OnDrawGizmosSelected()
     {
