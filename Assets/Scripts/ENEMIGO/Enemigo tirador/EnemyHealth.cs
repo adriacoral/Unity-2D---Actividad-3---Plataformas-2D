@@ -5,27 +5,37 @@ public class EnemyHealth : MonoBehaviour
     [Header("Vida del enemigo")]
     public int vidaMaxima = 3;
     private int vidaActual;
+    private Animator anim;
+    private bool muerto = false;
 
     void Start()
     {
         vidaActual = vidaMaxima;
+        anim = GetComponent<Animator>();
     }
 
-    // Llama a este método para hacerle daño (desde AtaqueNormal u otro sitio)
     public void RecibirDaño(int cantidad)
     {
+        if (muerto) return;
+
         vidaActual -= cantidad;
-        Debug.Log(gameObject.name + " recibió daño. Vida: " + vidaActual);
 
         if (vidaActual <= 0)
         {
             Morir();
         }
+        else
+        {
+            if (anim) anim.SetTrigger("hit");
+        }
     }
 
     void Morir()
     {
-        Debug.Log(gameObject.name + " ha muerto.");
-        Destroy(gameObject); // Destruye al enemigo
+        muerto = true;
+        if (anim) anim.SetTrigger("dead");
+        GetComponent<EnemyMovement>().enabled = false;
+        GetComponent<EnemyContact>().enabled = false;
+        Destroy(gameObject, 1.5f); // Espera que termine la animación
     }
 }
